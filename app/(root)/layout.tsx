@@ -12,10 +12,10 @@ export default function RootLayout({
     lastName: "Majumder",
   };
   return (
-    <section className="flex h-screen w-full font-inter">
+    <section className="flex md:flex-row flex-col h-screen w-full font-inter">
       <Sidebar user={loggedIn} />
-      <div className="flex size-full flex-col">
-        <div className="root-layout">
+      <div className="flex  flex-col">
+        <div className="flex  h-16 items-center justify-between p-5 shadow-creditCard sm:p-8 md:hidden">
           <Image alt="menu item" width={30} height={30} src="/icons/logo.svg" />
           <div>
             <MobileNav user={loggedIn} />

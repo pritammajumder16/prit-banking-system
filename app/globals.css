@@ -140,35 +140,6 @@
     @apply custom-scrollbar mb-8 flex w-full flex-nowrap;
   }
 
-  /* Right sidebar */
-  .right-sidebar {
-    @apply no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll !important;
-  }
-
-  .profile-banner {
-    @apply h-[120px] w-full bg-gradient-mesh bg-cover bg-no-repeat;
-  }
-
-  .profile {
-    @apply relative flex px-6 max-xl:justify-center;
-  }
-
-  .profile-img {
-    @apply flex-center absolute -top-8 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile;
-  }
-
-  .profile-details {
-    @apply flex flex-col pt-24;
-  }
-
-  .profile-name {
-    @apply text-24 font-semibold text-gray-900;
-  }
-
-  .profile-email {
-    @apply text-16 font-normal text-gray-600;
-  }
-
   .banks {
     @apply flex flex-col justify-between gap-8 px-6 py-8;
   }
@@ -232,15 +203,6 @@
 
   .banktab-item {
     @apply gap-[18px] border-b-2 flex px-2 sm:px-4 py-2 transition-all;
-  }
-
-  /* Mobile nav */
-  .mobilenav-sheet {
-    @apply flex h-[calc(100vh-72px)] flex-col justify-between overflow-y-auto;
-  }
-
-  .mobilenav-sheet_close {
-    @apply flex gap-3 items-center p-4 rounded-lg w-full max-w-60;
   }
 
   /* PlaidLink */
@@ -309,11 +271,6 @@
 
   .payment-transfer_btn {
     @apply text-14 w-full bg-bank-gradient font-semibold text-white shadow-form !important;
-  }
-
-  /* Root Layout */
-  .root-layout {
-    @apply flex h-16 items-center justify-between p-5 shadow-creditCard sm:p-8 md:hidden;
   }
 
   /* Bank Info */

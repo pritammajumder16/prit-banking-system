@@ -9,19 +9,7 @@ import React from "react";
 const MainNavContent = () => {
   const pathName = usePathname();
   return (
-    <nav className="flex flex-col gap-4">
-      <Link href="/" className="mb-12 cursor-pointer items-center gap-2 flex">
-        <Image
-          src={"/icons/logo.svg"}
-          width={34}
-          height={34}
-          alt="Logo"
-          className="size-[24px] max-xl:size-14"
-        />
-        <span className="2xl:text-26 font-ibm-plex-serif text-[26px] font-bold text-black-1 max-xl:hidden">
-          Horizon
-        </span>
-      </Link>
+    <>
       {sidebarLinks?.map((item) => {
         const isActive =
           pathName === item.route || pathName.startsWith(`${item.route}`);
@@ -53,8 +41,7 @@ const MainNavContent = () => {
           </Link>
         );
       })}
-      USER
-    </nav>
+    </>
   );
 };
 
