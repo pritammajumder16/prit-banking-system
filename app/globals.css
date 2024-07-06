@@ -45,7 +45,7 @@
 
 @layer utilities {
   .input-class {
-    @apply text-16 placeholder:text-16 rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500;
+    @apply text-base placeholder:text-base rounded-lg border border-gray-300 text-gray-900 placeholder:text-gray-500;
   }
 
   .sheet-content button {
@@ -53,7 +53,7 @@
   }
 
   .text14_padding10 {
-    @apply text-14 px-4 py-2.5 font-semibold;
+    @apply text-sm px-4 py-2.5 font-semibold;
   }
 
   .flex-center {
@@ -61,47 +61,7 @@
   }
 
   .header-2 {
-    @apply text-18 font-semibold text-gray-900;
-  }
-
-  .text-10 {
-    @apply text-[10px] leading-[14px];
-  }
-
-  .text-12 {
-    @apply text-[12px] leading-[16px];
-  }
-
-  .text-14 {
-    @apply text-[14px] leading-[20px];
-  }
-
-  .text-16 {
-    @apply text-[16px] leading-[24px];
-  }
-
-  .text-18 {
-    @apply text-[18px] leading-[22px];
-  }
-
-  .text-20 {
-    @apply text-[20px] leading-[24px];
-  }
-
-  .text-24 {
-    @apply text-[24px] leading-[30px];
-  }
-
-  .text-26 {
-    @apply text-[26px] leading-[32px];
-  }
-
-  .text-30 {
-    @apply text-[30px] leading-[38px];
-  }
-
-  .text-36 {
-    @apply text-[36px] leading-[44px];
+    @apply text-lg font-semibold text-gray-900;
   }
 
   .total-balance {
@@ -113,11 +73,11 @@
   }
 
   .total-balance-label {
-    @apply text-14 font-medium text-gray-600;
+    @apply text-sm font-medium text-gray-600;
   }
 
   .total-balance-amount {
-    @apply text-24 lg:text-30 flex-1 font-semibold text-gray-900;
+    @apply text-2xl lg:text-3xl flex-1 font-semibold text-gray-900;
   }
 
   .recent-transactions {
@@ -125,7 +85,7 @@
   }
 
   .view-all-btn {
-    @apply text-14 rounded-lg border border-gray-300 px-4 py-2.5 font-semibold text-gray-700;
+    @apply text-sm rounded-lg border border-gray-300 px-4 py-2.5 font-semibold text-gray-700;
   }
 
   .recent-transactions {
@@ -133,7 +93,7 @@
   }
 
   .recent-transactions-label {
-    @apply text-20 md:text-24 font-semibold text-gray-900;
+    @apply text-xl md:text-2xl font-semibold text-gray-900;
   }
 
   .recent-transactions-tablist {
@@ -171,24 +131,11 @@
   }
 
   .header-box-title {
-    @apply text-24 lg:text-30 font-semibold text-gray-900;
+    @apply text-2xl lg:text-3xl font-semibold text-gray-900;
   }
 
   .header-box-subtext {
-    @apply text-14 lg:text-16 font-normal text-gray-600;
-  }
-
-  /* Bank Card */
-  .bank-card {
-    @apply relative flex h-[190px] w-full max-w-[320px] justify-between rounded-[20px] border border-white bg-bank-gradient shadow-creditCard backdrop-blur-[6px];
-  }
-
-  .bank-card_content {
-    @apply relative z-10 flex size-full max-w-[228px] flex-col justify-between rounded-l-[20px] bg-gray-700 bg-bank-gradient px-5 pb-4 pt-5;
-  }
-
-  .bank-card_icon {
-    @apply flex size-full flex-1 flex-col items-end justify-between rounded-r-[20px] bg-bank-gradient bg-cover bg-center bg-no-repeat py-5 pr-5;
+    @apply text-sm lg:text-base font-normal text-gray-600;
   }
 
   /* Bank Info */
@@ -207,7 +154,7 @@
 
   /* PlaidLink */
   .plaidlink-primary {
-    @apply text-16 rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
+    @apply text-base rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
   }
 
   .plaidlink-ghost {
@@ -233,19 +180,19 @@
   }
 
   .form-label {
-    @apply text-14 w-full max-w-[280px] font-medium text-gray-700;
+    @apply text-sm w-full max-w-[280px] font-medium text-gray-700;
   }
 
   .form-message {
-    @apply text-12 text-red-500;
+    @apply text-xs text-red-500;
   }
 
   .form-btn {
-    @apply text-16 rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
+    @apply text-base rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
   }
 
   .form-link {
-    @apply text-14 cursor-pointer font-medium text-bankGradient;
+    @apply text-sm cursor-pointer font-medium text-bankGradient;
   }
 
   /* Payment Transfer */
@@ -270,7 +217,7 @@
   }
 
   .payment-transfer_btn {
-    @apply text-14 w-full bg-bank-gradient font-semibold text-white shadow-form !important;
+    @apply text-sm w-full bg-bank-gradient font-semibold text-white shadow-form !important;
   }
 
   /* Bank Info */
