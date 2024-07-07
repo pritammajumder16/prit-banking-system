@@ -10,7 +10,7 @@ declare type SearchParamProps = {
 declare type SignUpParams = {
   firstName: string;
   lastName: string;
-  address1: string;
+  address: string;
   city: string;
   state: string;
   postalCode: string;
@@ -33,7 +33,8 @@ declare type User = {
   dwollaCustomerId: string;
   firstName: string;
   lastName: string;
-  address1: string;
+  address: string;
+  password: string;
   city: string;
   state: string;
   postalCode: string;
@@ -325,4 +326,16 @@ declare interface getBankProps {
 
 declare interface getBankByAccountIdProps {
   accountId: string;
+}
+declare interface User {
+  firstName: string;
+  lastName: string;
+  address: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  dateOfBirth: string;
+  ssn: string;
+  email: string;
+  password: string;
 }

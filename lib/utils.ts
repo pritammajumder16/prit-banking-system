@@ -2,7 +2,7 @@
 import { type ClassValue, clsx } from "clsx";
 import qs from "query-string";
 import { twMerge } from "tailwind-merge";
-
+import crypto from "crypto";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -192,4 +192,41 @@ export const getTransactionStatus = (date: Date) => {
   twoDaysAgo.setDate(today.getDate() - 2);
 
   return date > twoDaysAgo ? "Processing" : "Success";
+};
+export async function hash(password: string) {
+  return new Promise((resolve, reject) => {
+    const salt = crypto.randomBytes(8).toString("hex");
+
+    crypto.scrypt(password, salt, 64, (err, derivedKey) => {
+      if (err) reject(err);
+      resolve(salt + ":" + derivedKey.toString("hex"));
+    });
+  });
+}
+export async function verifyHash(password: string, hash: string) {
+  return new Promise<boolean>((resolve, reject) => {
+    const [salt, key] = hash.split(":");
+    crypto.scrypt(password, salt, 64, (err, derivedKey) => {
+      if (err) reject(err);
+      resolve(key == derivedKey.toString("hex"));
+    });
+  });
+}
+export const getErrorResponseObject = ({
+  message,
+  data,
+}: {
+  message: string;
+  data?: any;
+}) => {
+  return { success: false, message, data };
+};
+export const getSuccessResponseObject = ({
+  message,
+  data,
+}: {
+  message: string;
+  data: any;
+}) => {
+  return { success: true, message, data };
 };

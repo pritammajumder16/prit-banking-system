@@ -9,6 +9,9 @@ import { Form } from "@/components/ui/form";
 import { Button } from "./ui/button";
 import CustomInput from "./CustomInput";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { signIn, signUp } from "@/lib/actions/user.actions";
+import { toast } from "react-toastify";
 
 const authFormSchemaMaker = (type: string) =>
   z.object({
@@ -18,6 +21,7 @@ const authFormSchemaMaker = (type: string) =>
     firstName: type == "sign-in" ? z.string().optional() : z.string().min(3),
     lastName: type == "sign-in" ? z.string().optional() : z.string().min(3),
     address: type == "sign-in" ? z.string().optional() : z.string().max(50),
+    city: type == "sign-in" ? z.string().optional() : z.string().max(50),
     state:
       type == "sign-in" ? z.string().optional() : z.string().min(2).max(20),
     postalCode:
@@ -28,7 +32,7 @@ const authFormSchemaMaker = (type: string) =>
 const AuthForm = ({ type }: { type: string }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
+  const router = useRouter();
   const formSchema = authFormSchemaMaker(type);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -37,10 +41,60 @@ const AuthForm = ({ type }: { type: string }) => {
       password: "",
     },
   });
-
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
     console.log(values);
+    try {
+      if (type === "sign-up") {
+        if (
+          !values.city ||
+          !values.state ||
+          !values.postalCode ||
+          !values.dateOfBirth ||
+          !values.firstName ||
+          !values.lastName ||
+          !values.address ||
+          !values.ssn
+        ) {
+          return;
+        }
+        const response = await signUp({
+          email: values.email,
+          password: values.password,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          address: values.address,
+          city: values.city,
+          state: values.state,
+          postalCode: values.postalCode,
+          dateOfBirth: values.dateOfBirth,
+          ssn: values.ssn,
+        });
+        if (response && response.success == true) {
+          router.push("/sign-in");
+        } else if (response && response.success == false) {
+          toast.error(response.message);
+        } else {
+          toast.error("Error signing up");
+        }
+      } else if (type === "sign-in") {
+        const response = await signIn({
+          email: values.email,
+          password: values.password,
+        });
+        if (response && response.success == true) {
+          router.push("/");
+        } else if (response && response.success == false) {
+          toast.error(response.message);
+        } else {
+          toast.error("Error logging in");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
   return (
     <section className="auth-form">
@@ -94,6 +148,13 @@ const AuthForm = ({ type }: { type: string }) => {
                     name={"address"}
                     label={"Address"}
                     placeholder={"Enter your Address"}
+                    type={"text"}
+                  />
+                  <CustomInput
+                    formControl={form.control}
+                    name={"city"}
+                    label={"City"}
+                    placeholder={"Enter your City"}
                     type={"text"}
                   />
                   <div className="flex gap-4">
