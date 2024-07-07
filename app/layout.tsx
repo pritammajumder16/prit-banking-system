@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
 import ToastProvider from "@/Providers/ToastifyProvider";
+import StoreProvider from "@/Providers/StoreProvider";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const ibmPlexSerif = IBM_Plex_Serif({
   subsets: ["latin"],
@@ -25,7 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${ibmPlexSerif.variable}`}>
-        <ToastProvider>{children}</ToastProvider>
+        <StoreProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </StoreProvider>
       </body>
     </html>
   );

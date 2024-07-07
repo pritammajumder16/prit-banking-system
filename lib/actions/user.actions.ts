@@ -76,63 +76,78 @@ export const signUp = async (data: SignUpParams) => {
 };
 
 export const getDetailsFromToken = async () => {
-  const accessToken = cookies().get("access-token");
-  if (!accessToken) {
-    return getErrorResponseObject({ message: "Unauthorized" });
-  }
-  if (!credentials.JWT_ACCESS_SECRET) {
+  try {
+    const accessToken = cookies().get("access-token");
+    if (!accessToken) {
+      return getErrorResponseObject({ message: "Unauthorized" });
+    }
+    if (!credentials.JWT_ACCESS_SECRET) {
+      return getErrorResponseObject({
+        message: "Internal server error",
+      });
+    }
+    const decoded = jwt.verify(
+      accessToken.value,
+      credentials.JWT_ACCESS_SECRET
+    );
+    if (!decoded) {
+      return getErrorResponseObject({
+        message: "Token expired, please login again!",
+        data: "TOKEN_EXPIRED",
+      });
+    }
+    return getSuccessResponseObject({
+      message: "Obtained details successfully",
+      data: decoded,
+    });
+  } catch (error) {
     return getErrorResponseObject({
-      message: "Internal server error",
+      message: String(error),
     });
   }
-  const decoded = jwt.verify(
-    String(accessToken),
-    credentials.JWT_ACCESS_SECRET
-  );
-  if (!decoded) {
-    return getErrorResponseObject({
-      message: "Token expired, please login again!",
-      data: "TOKEN_EXPIRED",
-    });
-  }
-  return getSuccessResponseObject({
-    message: "Obtained details successfully",
-    data: decoded,
-  });
 };
 
 export const verifyWithRefreshToken = async () => {
-  const refreshToken = cookies().get("refresh-token");
-  if (!refreshToken) {
+  try {
+    const refreshToken = cookies().get("refresh-token");
+    if (!refreshToken) {
+      return getErrorResponseObject({
+        message: "Token expired, please login again!",
+        data: "TOKEN_EXPIRED",
+      });
+    }
+    if (!credentials.JWT_REFRESH_SECRET || !credentials.JWT_ACCESS_SECRET) {
+      return getErrorResponseObject({
+        message: "Internal server error",
+      });
+    }
+    const decoded = jwt.verify(
+      refreshToken.value,
+      credentials.JWT_REFRESH_SECRET
+    );
+    if (!decoded) {
+      return getErrorResponseObject({
+        message: "Token expired, please login again!",
+        data: "TOKEN_EXPIRED",
+      });
+    }
+    cookies().set(
+      "access-token",
+      jwt.sign(decoded, credentials.JWT_ACCESS_SECRET, { expiresIn: "24h" })
+    );
+    cookies().set(
+      "refresh-token",
+      jwt.sign(decoded, credentials.JWT_REFRESH_SECRET, {
+        expiresIn: "10d",
+      })
+    );
+    return getSuccessResponseObject({
+      message: "Successfully fetched details",
+      data: decoded,
+    });
+  } catch (error) {
     return getErrorResponseObject({
-      message: "Token expired, please login again!",
-      data: "TOKEN_EXPIRED",
+      message: String(error),
     });
   }
-  if (!credentials.JWT_REFRESH_SECRET || !credentials.JWT_ACCESS_SECRET) {
-    return getErrorResponseObject({
-      message: "Internal server error",
-    });
-  }
-  const decoded = jwt.verify(
-    String(refreshToken),
-    credentials.JWT_REFRESH_SECRET
-  );
-  if (!decoded) {
-    return getErrorResponseObject({
-      message: "Token expired, please login again!",
-      data: "TOKEN_EXPIRED",
-    });
-  }
-  cookies().set(
-    "access-token",
-    jwt.sign(decoded, credentials.JWT_ACCESS_SECRET, { expiresIn: "24h" })
-  );
-  cookies().set(
-    "refresh-token",
-    jwt.sign(decoded, credentials.JWT_REFRESH_SECRET, {
-      expiresIn: "10d",
-    })
-  );
-  return decoded;
 };

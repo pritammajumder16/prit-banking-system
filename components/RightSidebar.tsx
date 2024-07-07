@@ -11,14 +11,14 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
           <div className=" flex px-6 max-xl:justify-center">
             <div className="flex-center absolute top-16 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile">
               <span className="text-5xl font-bold text-blue-500">
-                {user.firstName[0]}
+                {user?.firstName?.[0]}
               </span>
             </div>
             <div className="flex flex-col mt-40">
               <span className="text-24 font-semibold text-gray-900">
-                {user.firstName} {user.lastName}
+                {user?.firstName} {user?.lastName}
               </span>
-              <p className="text-16 font-normal text-gray-600">{user.email}</p>
+              <p className="text-16 font-normal text-gray-600">{user?.email}</p>
             </div>
           </div>
         </div>
@@ -39,7 +39,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
               <BankCard
                 key={banks[0].$id}
                 account={banks[0]}
-                userName={`${user.firstName} ${user.lastName}`}
+                userName={`${user?.firstName} ${user?.lastName}`}
                 showBalance={false}
               />
             </div>
@@ -49,7 +49,7 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
                 <BankCard
                   key={banks[0].$id}
                   account={banks[0]}
-                  userName={`${user.firstName} ${user.lastName}`}
+                  userName={`${user?.firstName} ${user?.lastName}`}
                   showBalance={false}
                 />
               </div>
