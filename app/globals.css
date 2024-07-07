@@ -191,10 +191,6 @@
     @apply text-base rounded-lg border border-bankGradient bg-bank-gradient font-semibold text-white shadow-form;
   }
 
-  .form-link {
-    @apply text-sm cursor-pointer font-medium text-bankGradient;
-  }
-
   /* Payment Transfer */
   .payment-transfer {
     @apply no-scrollbar flex flex-col overflow-y-scroll bg-gray-25 p-8 md:max-h-screen xl:py-12;
