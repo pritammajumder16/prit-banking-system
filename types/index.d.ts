@@ -26,7 +26,7 @@ declare type LoginUser = {
 };
 
 declare type User = {
-  $id: string;
+  _id: string;
   email: string;
   userId: string;
   dwollaCustomerUrl: string;
