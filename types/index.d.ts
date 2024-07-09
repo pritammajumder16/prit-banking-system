@@ -37,6 +37,8 @@ declare type User = {
   password: string;
   city: string;
   state: string;
+  dwollaCustomerId: string;
+  dwollaCustomerUrl: string;
   postalCode: string;
   dateOfBirth: string;
   ssn: string;
@@ -307,7 +309,7 @@ declare interface exchangePublicTokenProps {
   user: User;
 }
 
-declare interface createBankAccountProps {
+declare interface bankAccount {
   accessToken: string;
   userId: string;
   accountId: string;

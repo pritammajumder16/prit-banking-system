@@ -2,6 +2,7 @@
 import User from "@/Model/User";
 import jwt from "jsonwebtoken";
 import {
+  extractCustomerIdFromUrl,
   getErrorResponseObject,
   getSuccessResponseObject,
   hash,
@@ -9,6 +10,8 @@ import {
 } from "../utils";
 import { cookies } from "next/headers";
 import { credentials } from "@/constants/credentials";
+import { createDwollaCustomer } from "./dwolla.actions";
+import { HttpException } from "@/classes/http-exception";
 
 export const signIn = async (data: signInProps) => {
   try {
@@ -65,7 +68,20 @@ export const signUp = async (data: SignUpParams) => {
     };
 
     finalData.password = await hash(data.password);
-    const res = await User.create(finalData);
+
+    const dwollaCustomerUrl = await createDwollaCustomer({
+      ...finalData,
+      type: "personal",
+    });
+    if (!dwollaCustomerUrl) {
+      throw new HttpException("Error creating dwolla customer id", 400);
+    }
+    const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
+    finalData.dwollaCustomerId = dwollaCustomerId;
+    const res = await User.create({
+      ...finalData,
+      address1: finalData.address,
+    });
     return getSuccessResponseObject({
       data: res,
       message: "Signed up successfully",

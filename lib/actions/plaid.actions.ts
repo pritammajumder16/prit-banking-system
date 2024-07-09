@@ -13,6 +13,8 @@ import {
   parseStringify,
 } from "../utils";
 import { revalidatePath } from "next/cache";
+import { addFundingSource } from "./dwolla.actions";
+import Bank from "@/Model/Bank";
 
 export const createLinkToken = async (user: User) => {
   try {
@@ -33,6 +35,25 @@ export const createLinkToken = async (user: User) => {
   } catch (error) {
     return getErrorResponseObject({ message: String(error) });
   }
+};
+export const createBankAccount = async ({
+  userId,
+  bankId,
+  accountId,
+  accessToken,
+  fundingSourceUrl,
+  sharableId,
+}: bankAccount) => {
+  try {
+    await Bank.create({
+      userId,
+      bankId,
+      accountId,
+      accessToken,
+      fundingSourceUrl,
+      sharableId,
+    });
+  } catch (error) {}
 };
 export const exchangePublicToken = async ({
   publicToken,
@@ -70,7 +91,7 @@ export const exchangePublicToken = async ({
         accountId: accountData.account_id,
         accessToken,
         fundingSourceUrl,
-        shareableId: encryptId(accountData.account_id),
+        sharableId: encryptId(accountData.account_id),
       });
     }
     revalidatePath("/");
