@@ -71,17 +71,18 @@ export const signUp = async (data: SignUpParams) => {
 
     const dwollaCustomerUrl = await createDwollaCustomer({
       ...finalData,
+      address1: finalData.address,
       type: "personal",
     });
     if (!dwollaCustomerUrl) {
       throw new HttpException("Error creating dwolla customer id", 400);
     }
+    console.log(dwollaCustomerUrl);
     const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
+    console.log(dwollaCustomerId);
     finalData.dwollaCustomerId = dwollaCustomerId;
-    const res = await User.create({
-      ...finalData,
-      address1: finalData.address,
-    });
+    finalData.dwollaCustomerUrl = dwollaCustomerUrl;
+    const res = await User.create(finalData);
     return getSuccessResponseObject({
       data: res,
       message: "Signed up successfully",

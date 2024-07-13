@@ -2,12 +2,12 @@ import mongoose, { Schema } from "mongoose";
 
 const BankAccountSchema = new Schema<bankAccount>(
   {
-    accessToken: { Type: String, required: true },
-    userId: { Type: String, required: true },
-    accountId: { Type: String, required: true },
-    bankId: { Type: String, required: true },
-    fundingSourceUrl: { Type: String, required: true },
-    sharableId: { Type: String, required: true },
+    accessToken: { type: String, required: true },
+    userId: { type: String, required: true },
+    accountId: { type: String, required: true },
+    bankId: { type: String, required: true },
+    fundingSourceUrl: { type: String, required: true },
+    sharableId: { type: String, required: true },
   },
   {
     timestamps: true,

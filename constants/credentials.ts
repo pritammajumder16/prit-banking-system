@@ -5,4 +5,8 @@ export const credentials = {
   PLAID_CLIENT_ID: process.env.PLAID_CLIENT_ID,
   PLAID_SECRET_KEY: process.env.PLAID_SECRET_KEY,
   PLAID_ENV: process.env.PLAID_ENV,
+  DWOLLA_KEY: process.env.DWOLLA_KEY,
+  DWOLLA_SECRET: process.env.DWOLLA_SECRET,
+  DWOLLA_BASE_URL: process.env.DWOLLA_BASE_URL,
+  DWOLLA_ENVIRONMENT: process.env.DWOLLA_ENVIRONMENT,
 };

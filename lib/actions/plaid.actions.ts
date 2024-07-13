@@ -18,6 +18,7 @@ import Bank from "@/Model/Bank";
 
 export const createLinkToken = async (user: User) => {
   try {
+    console.log("creating link");
     const tokenParams = {
       user: {
         client_user_id: user._id,
@@ -28,9 +29,10 @@ export const createLinkToken = async (user: User) => {
       country_codes: ["US"] as CountryCode[],
     };
     const response = await plaidClient.linkTokenCreate(tokenParams);
+    console.log("created link", response);
     return getSuccessResponseObject({
       message: "successfully fetched token",
-      data: parseStringify(response),
+      data: response.data.link_token,
     });
   } catch (error) {
     return getErrorResponseObject({ message: String(error) });
