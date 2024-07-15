@@ -3,7 +3,12 @@ import Link from "next/link";
 import React from "react";
 import BankCard from "./BankCard";
 
-const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
+const RightSidebar = ({
+  user,
+  transactions,
+  accounts,
+  banks,
+}: RightSidebarProps) => {
   return (
     <div className="no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll ">
       <section className="flex flex-col pb-20 ">
@@ -37,18 +42,17 @@ const RightSidebar = ({ user, transactions, banks }: RightSidebarProps) => {
           <div className="relative flex flex-1 flex-col items-center justify-center gap-5">
             <div className="relative z-20">
               <BankCard
-                key={banks[0].$id}
-                account={banks[0]}
+                key={banks[0]._id}
+                account={accounts[0]}
                 userName={`${user?.firstName} ${user?.lastName}`}
                 showBalance={false}
               />
             </div>
             {banks[1] && (
               <div className="absolute right-0 top-8 z-10">
-                {" "}
                 <BankCard
-                  key={banks[0].$id}
-                  account={banks[0]}
+                  key={banks[0]._id}
+                  account={accounts[0]}
                   userName={`${user?.firstName} ${user?.lastName}`}
                   showBalance={false}
                 />

@@ -14,12 +14,11 @@ import {
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const [token, setToken] = useState(null);
-  console.log("plaid user", user);
+
   const router = useRouter();
   const getLinkToken = async () => {
-    console.log("use effect");
     const response = await createLinkToken(user);
-    console.log(response);
+
     setToken(response?.data);
   };
 
@@ -35,9 +34,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
     onSuccess,
   };
   const { open, ready } = usePlaidLink(config);
-  useEffect(() => {
-    console.log("what");
-  }, []);
+
   useEffect(() => {
     getLinkToken();
   }, [user]);

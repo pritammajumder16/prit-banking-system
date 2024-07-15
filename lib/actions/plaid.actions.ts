@@ -18,7 +18,6 @@ import Bank from "@/Model/Bank";
 
 export const createLinkToken = async (user: User) => {
   try {
-    console.log("creating link");
     const tokenParams = {
       user: {
         client_user_id: user._id,
@@ -29,7 +28,6 @@ export const createLinkToken = async (user: User) => {
       country_codes: ["US"] as CountryCode[],
     };
     const response = await plaidClient.linkTokenCreate(tokenParams);
-    console.log("created link", response);
     return getSuccessResponseObject({
       message: "successfully fetched token",
       data: response.data.link_token,
@@ -47,6 +45,14 @@ export const createBankAccount = async ({
   sharableId,
 }: bankAccount) => {
   try {
+    console.log("creating bank object", {
+      userId,
+      bankId,
+      accountId,
+      accessToken,
+      fundingSourceUrl,
+      sharableId,
+    });
     await Bank.create({
       userId,
       bankId,
@@ -87,7 +93,7 @@ export const exchangePublicToken = async ({
       bankName: accountData.name,
     });
     if (fundingSourceUrl) {
-      await createBankAccount({
+      const fundingSource = await createBankAccount({
         userId: user._id,
         bankId: itemId,
         accountId: accountData.account_id,

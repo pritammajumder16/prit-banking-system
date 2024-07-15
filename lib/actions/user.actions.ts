@@ -6,6 +6,7 @@ import {
   getErrorResponseObject,
   getSuccessResponseObject,
   hash,
+  parseStringify,
   verifyHash,
 } from "../utils";
 import { cookies } from "next/headers";
@@ -16,8 +17,7 @@ import { HttpException } from "@/classes/http-exception";
 export const signIn = async (data: signInProps) => {
   try {
     if (!data.email || !data.password) {
-      console.log("email and password are required");
-      return;
+      throw new HttpException("email and password are required", 400);
     }
     let userDetails: any = await User.findOne({ email: data.email }).lean();
     if (!userDetails) {
@@ -77,14 +77,14 @@ export const signUp = async (data: SignUpParams) => {
     if (!dwollaCustomerUrl) {
       throw new HttpException("Error creating dwolla customer id", 400);
     }
-    console.log(dwollaCustomerUrl);
     const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerUrl);
-    console.log(dwollaCustomerId);
+
     finalData.dwollaCustomerId = dwollaCustomerId;
     finalData.dwollaCustomerUrl = dwollaCustomerUrl;
     const res = await User.create(finalData);
+    console.log("created account after signup", res);
     return getSuccessResponseObject({
-      data: res,
+      data: parseStringify(res),
       message: "Signed up successfully",
     });
   } catch (error) {

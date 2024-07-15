@@ -72,8 +72,8 @@ const AuthForm = ({ type }: { type: string }) => {
         });
         if (response && response.success == true) {
           // router.push("/sign-in");
+          console.log("client-user created", response.data);
           setUser(response.data);
-          console.log(response.data);
         } else if (response && response.success == false) {
           toast.error(response.message);
         } else {
@@ -85,7 +85,6 @@ const AuthForm = ({ type }: { type: string }) => {
           password: values.password,
         });
         if (response && response.success == true) {
-          console.log(response.data);
           router.push("/");
         } else if (response && response.success == false) {
           toast.error(response.message);
