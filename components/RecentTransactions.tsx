@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { BankTabItem } from "./BankTabItem";
+import BankInfo from "./BankInfo";
 
 const RecentTransactions = ({
   accounts,
@@ -36,7 +37,11 @@ const RecentTransactions = ({
             value={account.bank._id}
             className="space-y-4"
           >
-            Make changes to your account here.
+            <BankInfo
+              account={account}
+              bankId={account?.bank._id}
+              type={"full"}
+            />
           </TabsContent>
         ))}
       </Tabs>
