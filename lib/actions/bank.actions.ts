@@ -52,7 +52,7 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
           mask: accountData.mask!,
           type: accountData.type as string,
           subtype: accountData.subtype! as string,
-          bankId: bank._id,
+          bank,
           transactions: transactions,
           sharableId: bank.sharableId,
         };
@@ -71,7 +71,6 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
         accounts,
         totalBanks,
         totalCurrentBalance,
-        banks,
       }),
     });
   } catch (error) {
@@ -85,7 +84,7 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
 export const getAccount = async ({ bankId }: getAccountProps) => {
   try {
     // get bank from db
-    const bank = await Bank.findOne({ bankId });
+    const bank = await Bank.findOne({ _id: bankId });
 
     // get account info from plaid
     const accountsResponse = await plaidClient.accountsGet({
@@ -133,7 +132,7 @@ export const getAccount = async ({ bankId }: getAccountProps) => {
       mask: accountData.mask!,
       type: accountData.type as string,
       subtype: accountData.subtype! as string,
-      appwriteItemId: bank.$id,
+      bank,
     };
 
     // sort transactions by date such that the most recent transaction is first
@@ -143,7 +142,7 @@ export const getAccount = async ({ bankId }: getAccountProps) => {
     return getSuccessResponseObject({
       message: "successfully fetched account",
       data: parseStringify({
-        data: account,
+        account,
         transactions: allTransactions,
       }),
     });

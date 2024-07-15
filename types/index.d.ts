@@ -52,7 +52,7 @@ declare type NewUserParams = {
 };
 
 declare type Account = {
-  id: string;
+  _id: string;
   availableBalance: number;
   currentBalance: number;
   officialName: string;
@@ -61,12 +61,11 @@ declare type Account = {
   name: string;
   type: string;
   subtype: string;
-  bankId: string;
+  bank: Bank;
   sharableId: string;
 };
 
 declare type Transaction = {
-  id: string;
   _id: string;
   name: string;
   paymentChannel: string;
