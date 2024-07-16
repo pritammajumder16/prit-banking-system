@@ -74,10 +74,6 @@
     @apply flex items-center justify-center;
   }
 
-  .header-2 {
-    @apply text-lg font-semibold text-gray-900;
-  }
-
   .total-balance {
     @apply flex w-full items-center gap-4 rounded-xl border border-gray-200 p-4 shadow-chart sm:gap-6 sm:p-6;
   }
@@ -96,11 +92,6 @@
 
   .banks {
     @apply flex flex-col justify-between gap-8 px-6 py-8;
-  }
-
-  /* My Banks */
-  .my-banks {
-    @apply flex h-screen max-h-screen w-full flex-col gap-8 bg-gray-25 p-8 xl:py-12;
   }
 
   .header-box {

@@ -30,7 +30,7 @@ const RightSidebar = ({
       </section>
       <section className="banks">
         <div className="flex w-full justify-between">
-          <span className="header-2"> My banks</span>
+          <span className="text-lg font-semibold text-gray-900"> My banks</span>
           <Link href={"/"} className="flex gap-2 items-center">
             <Image width={20} height={20} alt="plus" src={"/icons/plus.svg"} />
             <span className="text-14 font-semibold text-gray-600">

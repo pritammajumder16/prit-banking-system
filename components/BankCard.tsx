@@ -11,8 +11,8 @@ const BankCard = ({
   return (
     <div className="flex flex-col">
       <Link
-        href={"/"}
-        className="relative flex h-48 w-full max-w-[320px] justify-between rounded-[20px] border border-white bg-bank-gradient shadow-creditCard backdrop-blur-[6px]"
+        href={`/transaction-history?id=${account.id}`}
+        className="relative flex h-48 w-full max-w-[320px] justify-between rounded-[20px] border border-white bg-bank-gradient shadow-creditCard backdrop-blur-[6px] "
       >
         <div className="relative z-10 flex size-full  flex-col justify-between rounded-l-[20px]  bg-bank-gradient px-5 pb-4 pt-5">
           <div>
@@ -32,7 +32,7 @@ const BankCard = ({
               <span className="text-xs font-semibold text-white">●●/●●</span>
             </div>
             <span className=" text-sm whitespace-nowrap font-semibold tracking-[1.1px] text-white">
-              ●●●● ●●●● ●●●● <span className="text-base">{1234}</span>
+              ●●●● ●●●● ●●●● <span className="text-base">{account.mask}</span>
             </span>
           </div>
         </div>
