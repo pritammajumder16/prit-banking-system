@@ -261,3 +261,34 @@ export const createTransfer = async () => {
     return getErrorResponseObject({ message: String(error) });
   }
 };
+
+export const getBank = async ({ bankId }: { bankId: string }) => {
+  try {
+    const bank = await Bank.findOne({ _id: bankId });
+    return getSuccessResponseObject({
+      message: "successfully fetched bank",
+      data: parseStringify(bank),
+    });
+  } catch (error) {
+    console.error("An error occurred while getting bank:", error);
+
+    return getErrorResponseObject({ message: String(error) });
+  }
+};
+export const getBankByAccountId = async ({
+  accountId,
+}: {
+  accountId: string;
+}) => {
+  try {
+    const bank = await Bank.findOne({ accountId });
+    return getSuccessResponseObject({
+      message: "successfully fetched bank",
+      data: parseStringify(bank),
+    });
+  } catch (error) {
+    console.error("An error occurred while getting bank:", error);
+
+    return getErrorResponseObject({ message: String(error) });
+  }
+};
