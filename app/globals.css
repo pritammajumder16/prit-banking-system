@@ -103,23 +103,6 @@
     @apply flex h-screen max-h-screen w-full flex-col gap-8 bg-gray-25 p-8 xl:py-12;
   }
 
-  /* My Banks */
-  .transactions {
-    @apply flex max-h-screen w-full flex-col gap-8 overflow-y-scroll bg-gray-25 p-8 xl:py-12;
-  }
-
-  .transactions-header {
-    @apply flex w-full flex-col items-start justify-between gap-8 md:flex-row;
-  }
-
-  .transactions-account {
-    @apply flex flex-col justify-between gap-4 rounded-lg border-y bg-blue-600 px-4 py-5 md:flex-row;
-  }
-
-  .transactions-account-balance {
-    @apply flex-center flex-col  gap-2 rounded-md bg-blue-25/20 px-4 py-2 text-white;
-  }
-
   .header-box {
     @apply flex flex-col gap-1;
   }
