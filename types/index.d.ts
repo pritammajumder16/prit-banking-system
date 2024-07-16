@@ -52,7 +52,7 @@ declare type NewUserParams = {
 };
 
 declare type Account = {
-  _id: string;
+  id: string;
   availableBalance: number;
   currentBalance: number;
   officialName: string;
@@ -66,7 +66,7 @@ declare type Account = {
 };
 
 declare type Transaction = {
-  _id: string;
+  id: string;
   name: string;
   paymentChannel: string;
   type: string;
@@ -175,7 +175,7 @@ declare interface PaginationProps {
 }
 
 declare interface PlaidLinkProps {
-  user: User;
+  user?: User;
   variant?: "primary" | "ghost";
   dwollaCustomerId?: string;
 }

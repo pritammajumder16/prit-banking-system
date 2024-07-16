@@ -11,21 +11,26 @@ import {
   createLinkToken,
   exchangePublicToken,
 } from "@/lib/actions/plaid.actions";
+import Image from "next/image";
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const [token, setToken] = useState(null);
 
   const router = useRouter();
   const getLinkToken = async () => {
-    const response = await createLinkToken(user);
+    if (user) {
+      const response = await createLinkToken(user);
 
-    setToken(response?.data);
+      setToken(response?.data);
+    }
   };
 
   const onSuccess = useCallback<PlaidLinkOnSuccess>(
     async (public_token: string) => {
-      await exchangePublicToken({ publicToken: public_token, user });
-      router.push("/");
+      if (user) {
+        await exchangePublicToken({ publicToken: public_token, user });
+        router.push("/");
+      }
     },
     [user]
   );
@@ -49,9 +54,34 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
           Connect bank
         </Button>
       ) : variant == "ghost" ? (
-        <Button>Connect bank</Button>
+        <Button
+          variant={"ghost"}
+          onClick={() => open()}
+          className="flex cursor-pointer items-center justify-center gap-3 rounded-lg px-3 py-7 hover:bg-white lg:justify-start"
+        >
+          <Image
+            src={"/icons/connect-bank.svg"}
+            alt={"connect bank"}
+            width={24}
+            height={24}
+          />
+          <p className=" hidden text-base font-semibold text-black-2 xl:block">
+            Connect bank
+          </p>
+        </Button>
       ) : (
-        <Button>Connect bank</Button>
+        <Button
+          onClick={() => open()}
+          className="flex !justify-start cursor-pointer gap-3 rounded-lg !bg-transparent flex-row"
+        >
+          <Image
+            src={"/icons/connect-bank.svg"}
+            alt={"connect bank"}
+            width={24}
+            height={24}
+          />
+          <p className="text-base font-semibold text-black-2">Connect bank</p>
+        </Button>
       )}
     </>
   );

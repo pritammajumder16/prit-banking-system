@@ -3,6 +3,7 @@ import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { BankTabItem } from "./BankTabItem";
 import BankInfo from "./BankInfo";
+import TransactionsTable from "./TransactionsTable";
 
 const RecentTransactions = ({
   accounts,
@@ -10,6 +11,7 @@ const RecentTransactions = ({
   page,
   bankId,
 }: RecentTransactionsProps) => {
+  console.log("accountt", accounts);
   return (
     <section className="flex w-full flex-col gap-6">
       <header className="flex items-center justify-between">
@@ -26,14 +28,14 @@ const RecentTransactions = ({
       <Tabs defaultValue={bankId} className="w-full">
         <TabsList className="custom-scrollbar mb-8 flex w-full flex-nowrap">
           {accounts.map((account: Account) => (
-            <TabsTrigger value={account.bank._id} key={account._id}>
+            <TabsTrigger value={account.bank._id} key={account.id}>
               <BankTabItem account={account} bankId={account.bank._id} />
             </TabsTrigger>
           ))}
         </TabsList>
         {accounts.map((account: Account) => (
           <TabsContent
-            key={account._id}
+            key={account.id}
             value={account.bank._id}
             className="space-y-4"
           >
@@ -42,6 +44,7 @@ const RecentTransactions = ({
               bankId={account?.bank._id}
               type={"full"}
             />
+            <TransactionsTable transactions={transactions} />
           </TabsContent>
         ))}
       </Tabs>

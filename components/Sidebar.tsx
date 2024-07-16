@@ -2,6 +2,7 @@ import React from "react";
 import MainNavContent from "./MainNavContent";
 import Link from "next/link";
 import Image from "next/image";
+import PlaidLink from "./PlaidLink";
 
 const Sidebar = ({ user }: SiderbarProps) => {
   return (
@@ -23,7 +24,7 @@ const Sidebar = ({ user }: SiderbarProps) => {
           </span>
         </Link>
         <MainNavContent />
-        USER
+        <PlaidLink user={user} />
       </nav>
       FOOTER
     </section>
