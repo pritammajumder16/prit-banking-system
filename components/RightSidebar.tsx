@@ -3,12 +3,7 @@ import Link from "next/link";
 import React from "react";
 import BankCard from "./BankCard";
 
-const RightSidebar = ({
-  user,
-  transactions,
-  accounts,
-  banks,
-}: RightSidebarProps) => {
+const RightSidebar = ({ user, accounts, banks }: RightSidebarProps) => {
   return (
     <div className="no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll ">
       <section className="flex flex-col pb-20 ">

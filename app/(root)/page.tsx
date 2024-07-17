@@ -1,5 +1,6 @@
 "use client";
 import HeaderBox from "@/components/HeaderBox";
+import Loading from "@/components/Loader";
 import RecentTransactions from "@/components/RecentTransactions";
 import RightSidebar from "@/components/RightSidebar";
 import TotalBalanceBox from "@/components/TotalBalanceBox";
@@ -36,12 +37,7 @@ const Home = () => {
       }
     })();
   }, [stableLoggedIn]);
-  if (!accountsData || !currentAccount || !stableLoggedIn)
-    return (
-      <div className="h-screen w-screen flex items-center justify-center">
-        <Loader className="animate-spin" />
-      </div>
-    );
+  if (!accountsData || !currentAccount || !stableLoggedIn) return <Loading />;
   return (
     <section className="no-scrollbar flex w-full flex-row max-xl:max-h-screen max-xl:overflow-y-scroll">
       <div className="no-scrollbar flex w-full flex-1 flex-col gap-8 px-5 sm:px-8 py-7 lg:py-12 xl:max-h-screen xl:overflow-y-scroll">

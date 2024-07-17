@@ -1,4 +1,5 @@
 "use client";
+import Loading from "@/components/Loader";
 import MobileNav from "@/components/MobileNav";
 import Sidebar from "@/components/Sidebar";
 import {
@@ -54,12 +55,7 @@ export default function RootLayout({
     getInitialDetails();
   }, []);
 
-  if (!memoizedLoggedIn)
-    return (
-      <div className="h-screen w-screen flex items-center justify-center">
-        <Loader className="animate-spin" />
-      </div>
-    );
+  if (!memoizedLoggedIn) return <Loading />;
 
   return (
     <section className="flex md:flex-row flex-col h-screen w-full font-inter">

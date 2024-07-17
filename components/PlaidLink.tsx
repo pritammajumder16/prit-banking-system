@@ -12,6 +12,7 @@ import {
   exchangePublicToken,
 } from "@/lib/actions/plaid.actions";
 import Image from "next/image";
+import Loading from "./Loader";
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const [token, setToken] = useState<string | null>(null);
@@ -54,11 +55,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const { open, ready } = usePlaidLink(config);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center">
-        <p>Loading...</p>
-      </div>
-    );
+    return <Loading />;
   }
 
   return (

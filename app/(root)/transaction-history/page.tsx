@@ -1,5 +1,6 @@
 "use client";
 import HeaderBox from "@/components/HeaderBox";
+import Loading from "@/components/Loader";
 import TransactionsTable from "@/components/TransactionsTable";
 import { getAccounts, getAccount } from "@/lib/actions/bank.actions";
 import { formatAmount } from "@/lib/utils";
@@ -30,6 +31,7 @@ const TransactionHistory = () => {
       setCurrentAccount(currentAccountResponse.data);
     })();
   }, []);
+  if (!currentAccount) return <Loading />;
   return (
     <section className="flex max-h-screen w-full flex-col gap-8 overflow-y-scroll bg-gray-25 p-8 xl:py-12">
       <div className="flex w-full flex-col items-start justify-between gap-8 md:flex-row">
