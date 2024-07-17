@@ -17,7 +17,6 @@ import {
 import CategoryBadge from "./CategoryBadge";
 
 const TransactionsTable = ({ transactions }: TransactionTableProps) => {
-  console.log(transactions);
   return (
     <Table>
       <TableCaption className="bg-[#f9fafb]">
@@ -38,7 +37,7 @@ const TransactionsTable = ({ transactions }: TransactionTableProps) => {
         {transactions.map((t: Transaction) => {
           const status = getTransactionStatus(new Date(t.date));
           const amount = formatAmount(t.amount);
-          console.log(amount);
+
           const isDebit = t.type === "debit";
 
           const isCredit = t.type === "credit";

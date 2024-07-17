@@ -37,8 +37,6 @@ declare type User = {
   password: string;
   city: string;
   state: string;
-  dwollaCustomerId: string;
-  dwollaCustomerUrl: string;
   postalCode: string;
   dateOfBirth: string;
   ssn: string;

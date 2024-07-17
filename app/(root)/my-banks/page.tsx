@@ -15,7 +15,7 @@ const MyBanks = () => {
   useEffect(() => {
     (async () => {
       const accountsResponse = await getAccounts({ userId: loggedIn._id });
-      console.log(accountsResponse);
+
       setAccountsData(accountsResponse.data);
     })();
   }, []);

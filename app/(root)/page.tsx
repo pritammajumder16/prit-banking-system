@@ -4,14 +4,14 @@ import RecentTransactions from "@/components/RecentTransactions";
 import RightSidebar from "@/components/RightSidebar";
 import TotalBalanceBox from "@/components/TotalBalanceBox";
 import { getAccount, getAccounts } from "@/lib/actions/bank.actions";
+import { selectAuth } from "@/redux/selectors";
 import { Loader } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 const Home = () => {
-  const loggedIn = useSelector((state: any) => {
-    return state?.auth?.auth;
-  });
+  const loggedIn = useSelector(selectAuth);
+  const stableLoggedIn = useMemo(() => loggedIn, [loggedIn?._id]);
   const [page, setPage] = useState<number>(1);
   const [accountsData, setAccountsData] = useState<TotlaBalanceBoxProps>();
   const [currentAccount, setCurrentAccount] = useState<{
@@ -20,19 +20,23 @@ const Home = () => {
   }>();
   useEffect(() => {
     (async () => {
-      const accountsResponse = await getAccounts({ userId: loggedIn._id });
-      console.log(accountsResponse);
-      setAccountsData(accountsResponse.data);
-      const currentBankId = accountsResponse?.data?.accounts?.[0]?.bank?._id;
-      console.log(currentBankId);
-      const currentAccountResponse = await getAccount({
-        bankId: currentBankId,
-      });
+      if (stableLoggedIn) {
+        const accountsResponse = await getAccounts({
+          userId: stableLoggedIn?._id,
+        });
 
-      setCurrentAccount(currentAccountResponse.data);
+        setAccountsData(accountsResponse.data);
+        const currentBankId = accountsResponse?.data?.accounts?.[0]?.bank?._id;
+
+        const currentAccountResponse = await getAccount({
+          bankId: currentBankId,
+        });
+
+        setCurrentAccount(currentAccountResponse.data);
+      }
     })();
-  }, []);
-  if (!accountsData || !currentAccount)
+  }, [stableLoggedIn]);
+  if (!accountsData || !currentAccount || !stableLoggedIn)
     return (
       <div className="h-screen w-screen flex items-center justify-center">
         <Loader className="animate-spin" />
@@ -46,7 +50,7 @@ const Home = () => {
             type="greeting"
             title="Welcome"
             subtext="Access and manage your account and transactions efficiently"
-            user={loggedIn?.firstName || "Guest"}
+            user={stableLoggedIn?.firstName || "Guest"}
           />
           <TotalBalanceBox
             accounts={accountsData?.accounts}
@@ -63,7 +67,7 @@ const Home = () => {
       </div>
       <RightSidebar
         banks={[]}
-        user={loggedIn}
+        user={stableLoggedIn}
         transactions={currentAccount?.transactions}
         accounts={accountsData?.accounts?.slice(0, 1)}
       />

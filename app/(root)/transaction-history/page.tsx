@@ -19,10 +19,10 @@ const TransactionHistory = () => {
   useEffect(() => {
     (async () => {
       const accountsResponse = await getAccounts({ userId: loggedIn._id });
-      console.log(accountsResponse);
+
       setAccountsData(accountsResponse.data);
       const currentBankId = accountsResponse?.data?.accounts?.[0]?.bank?._id;
-      console.log(currentBankId);
+
       const currentAccountResponse = await getAccount({
         bankId: currentBankId,
       });

@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { Button } from "./ui/button";
 import {
   PlaidLinkOnSuccess,
@@ -14,38 +14,56 @@ import {
 import Image from "next/image";
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
-  const getLinkToken = async () => {
+
+  const getLinkToken = useCallback(async () => {
     if (user) {
       const response = await createLinkToken(user);
-
+      console.log(response);
       setToken(response?.data);
+      setLoading(false);
     }
-  };
+  }, [user]);
 
   const onSuccess = useCallback<PlaidLinkOnSuccess>(
     async (public_token: string) => {
+      console.log(public_token);
       if (user) {
         await exchangePublicToken({ publicToken: public_token, user });
         router.push("/");
       }
     },
-    [user]
+    [user, router]
   );
-  const config: PlaidLinkOptions = {
-    token,
-    onSuccess,
-  };
-  const { open, ready } = usePlaidLink(config);
 
   useEffect(() => {
     getLinkToken();
-  }, [user]);
+  }, [getLinkToken]);
+
+  const config: PlaidLinkOptions = useMemo(
+    () => ({
+      token,
+      onSuccess,
+    }),
+    [token, onSuccess]
+  );
+
+  const { open, ready } = usePlaidLink(config);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <>
-      {variant == "primary" ? (
+      {variant === "primary" ? (
         <Button
           onClick={() => open()}
           disabled={!ready}
@@ -53,7 +71,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
         >
           Connect bank
         </Button>
-      ) : variant == "ghost" ? (
+      ) : variant === "ghost" ? (
         <Button
           variant={"ghost"}
           onClick={() => open()}
@@ -65,14 +83,14 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
             width={24}
             height={24}
           />
-          <p className=" hidden text-base font-semibold text-black-2 xl:block">
+          <p className="text-base font-semibold text-black-2 xl:block">
             Connect bank
           </p>
         </Button>
       ) : (
         <Button
           onClick={() => open()}
-          className="flex !justify-start cursor-pointer gap-3 rounded-lg !bg-transparent flex-row"
+          className="flex justify-start cursor-pointer gap-3 rounded-lg bg-transparent flex-row"
         >
           <Image
             src={"/icons/connect-bank.svg"}

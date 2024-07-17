@@ -45,14 +45,6 @@ export const createBankAccount = async ({
   sharableId,
 }: bankAccount) => {
   try {
-    console.log("creating bank object", {
-      userId,
-      bankId,
-      accountId,
-      accessToken,
-      fundingSourceUrl,
-      sharableId,
-    });
     await Bank.create({
       userId,
       bankId,

@@ -82,7 +82,6 @@ export const signUp = async (data: SignUpParams) => {
     finalData.dwollaCustomerId = dwollaCustomerId;
     finalData.dwollaCustomerUrl = dwollaCustomerUrl;
     const res = await User.create(finalData);
-    console.log("created account after signup", res);
     return getSuccessResponseObject({
       data: parseStringify(res),
       message: "Signed up successfully",
@@ -161,6 +160,20 @@ export const verifyWithRefreshToken = async () => {
     return getSuccessResponseObject({
       message: "Successfully fetched details",
       data: decoded,
+    });
+  } catch (error) {
+    return getErrorResponseObject({
+      message: String(error),
+    });
+  }
+};
+export const logout = () => {
+  try {
+    cookies().delete("access-token");
+    cookies().delete("refresh-token");
+    return getSuccessResponseObject({
+      message: "Successfully logged out ",
+      data: { success: true },
     });
   } catch (error) {
     return getErrorResponseObject({

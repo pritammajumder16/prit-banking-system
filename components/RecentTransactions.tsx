@@ -11,7 +11,6 @@ const RecentTransactions = ({
   page,
   bankId,
 }: RecentTransactionsProps) => {
-  console.log("accountt", accounts);
   return (
     <section className="flex w-full flex-col gap-6">
       <header className="flex items-center justify-between">
