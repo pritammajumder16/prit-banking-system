@@ -69,11 +69,6 @@
   .text14_padding10 {
     @apply text-sm px-4 py-2.5 font-semibold;
   }
-
-  .flex-center {
-    @apply flex items-center justify-center;
-  }
-
   .total-balance {
     @apply flex w-full items-center gap-4 rounded-xl border border-gray-200 p-4 shadow-chart sm:gap-6 sm:p-6;
   }

@@ -37,7 +37,7 @@ const BankInfo = ({ account, bankId, type }: BankInfoProps) => {
       })}
     >
       <figure
-        className={`flex-center h-fit rounded-full bg-blue-100 ${colors.lightBg}`}
+        className={`flex items-center justify-center h-fit rounded-full bg-blue-100 ${colors.lightBg}`}
       >
         <Image
           src="/icons/connect-bank.svg"

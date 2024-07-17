@@ -54,7 +54,7 @@ const TransactionHistory = () => {
               <span className="text-base">{currentAccount?.account.mask}</span>
             </span>
           </div>
-          <div className="flex-center flex-col  gap-2 rounded-md bg-blue-25/20 px-4 py-2 text-white">
+          <div className="flex items-center justify-center flex-col  gap-2 rounded-md bg-blue-25/20 px-4 py-2 text-white">
             <p className="text-sm">Current balance</p>
             <p className=" text-2xl text-center font-bold">
               {formatAmount(currentAccount?.account.currentBalance || 0)}

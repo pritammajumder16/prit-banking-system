@@ -10,7 +10,7 @@ const CategoryBadge = ({ category }: { category: string }) => {
   return (
     <div
       className={cn(
-        " flex-center truncate w-fit gap-1 rounded-2xl border-[1.5px] py-[2px] pl-1.5 pr-2",
+        " flex items-center justify-center truncate w-fit gap-1 rounded-2xl border-[1.5px] py-[2px] pl-1.5 pr-2",
         borderColor,
         chipBackgroundColor
       )}

@@ -54,10 +54,6 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
 
   const { open, ready } = usePlaidLink(config);
 
-  if (loading) {
-    return <Loading />;
-  }
-
   return (
     <>
       {variant === "primary" ? (

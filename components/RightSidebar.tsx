@@ -9,7 +9,7 @@ const RightSidebar = ({ user, accounts, banks }: RightSidebarProps) => {
       <section className="flex flex-col pb-20 ">
         <div className="h-[120px] w-full bg-gradient-mesh bg-cover bg-no-repeat">
           <div className=" flex px-6 max-xl:justify-center">
-            <div className="flex-center absolute top-16 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile">
+            <div className="flex items-center justify-center absolute top-16 size-24 rounded-full bg-gray-100 border-8 border-white p-2 shadow-profile">
               <span className="text-5xl font-bold text-blue-500">
                 {user?.firstName?.[0]}
               </span>

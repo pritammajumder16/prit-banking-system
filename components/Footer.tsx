@@ -8,10 +8,10 @@ const Footer = ({ user }: { user?: User }) => {
   const router = useRouter();
   if (!user) return null;
   return (
-    <div className="w-full flex flex-col">
+    <div className="w-full flex flex-col text-black-2">
       <div className="flex w-full cursor-pointer items-center justify-between gap-2 py-6">
         <div className="flex size-10 min-w-10 items-center justify-center rounded-full bg-gray-200">
-          <span className="font-semibold text-xl">{user.firstName[0]}</span>
+          <span className="font-semibold text-xl ">{user.firstName[0]}</span>
         </div>
         <div className="flex flex-col w-full flex-1 pr-10">
           <span className="truncate">
