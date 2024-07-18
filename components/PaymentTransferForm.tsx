@@ -29,6 +29,7 @@ import {
   getBankByAccountId,
 } from "@/lib/actions/bank.actions";
 import { useSelector } from "react-redux";
+import { createTransaction } from "@/lib/actions/transaction.actions";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -90,19 +91,20 @@ const PaymentTransferForm = () => {
         const transaction = {
           name: data.name,
           amount: data.amount,
-          senderId: senderBank.userId.$id,
-          senderBankId: senderBank.$id,
-          receiverId: receiverBank.userId.$id,
-          receiverBankId: receiverBank.$id,
+          senderId: senderBank.userId,
+          senderBankId: senderBank._id,
+          receiverId: receiverBank.userId,
+          receiverBankId: receiverBank._id,
           email: data.email,
         };
+        console.log(transaction);
+        const newTransaction = await createTransaction(transaction);
 
-        // const newTransaction = await createTransaction(transaction);
-
-        // if (newTransaction) {
-        //   form.reset();
-        //   router.push("/");
-        // }
+        if (newTransaction && newTransaction.success) {
+          console.log(newTransaction);
+          form.reset();
+          router.push("/");
+        }
       }
     } catch (error) {
       console.error("Submitting create transfer request failed: ", error);

@@ -17,6 +17,7 @@ import {
 
 import Bank from "@/Model/Bank";
 import { plaidClient } from "../plaid";
+import { getTransactionsByBankId } from "./transaction.actions";
 
 // Get multiple bank accounts
 export const getAccounts = async ({ userId }: getAccountsProps) => {
@@ -92,22 +93,22 @@ export const getAccount = async ({ bankId }: getAccountProps) => {
     });
     const accountData = accountsResponse.data.accounts[0];
 
-    // // get transfer transactions from appwrite
-    // const transferTransactionsData = await getTransactionsByBankId({
-    //   bankId: bank._id,
-    // });
-
-    // const transferTransactions = transferTransactionsData.documents.map(
-    //   (transferData: Transaction) => ({
-    //     id: transferData._id,
-    //     name: transferData.name!,
-    //     amount: transferData.amount!,
-    //     date: transferData.createdAt,
-    //     paymentChannel: transferData.channel,
-    //     category: transferData.category,
-    //     type: transferData.senderBankId === bank.$id ? "debit" : "credit",
-    //   })
-    // );
+    // get transfer transactions from appwrite
+    const transferTransactionsData = await getTransactionsByBankId({
+      bankId: bank._id,
+    });
+    console.log(transferTransactionsData);
+    const transferTransactions = transferTransactionsData.data.transactions.map(
+      (transferData: any) => ({
+        id: transferData._id,
+        name: transferData.name!,
+        amount: transferData.amount!,
+        date: transferData.createdAt,
+        paymentChannel: transferData.channel,
+        category: transferData.category,
+        type: transferData.senderBankId === bank._id ? "debit" : "credit",
+      })
+    );
 
     // get institution info from plaid
     const institution = (
@@ -136,7 +137,7 @@ export const getAccount = async ({ bankId }: getAccountProps) => {
     };
 
     // sort transactions by date such that the most recent transaction is first
-    const allTransactions = [...transactions].sort(
+    const allTransactions = [...transactions, ...transferTransactions].sort(
       (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
     );
     return getSuccessResponseObject({
