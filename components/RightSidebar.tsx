@@ -2,8 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import BankCard from "./BankCard";
+import { countTransactionCategories } from "@/lib/utils";
+import Category from "./Category";
 
-const RightSidebar = ({ user, accounts, banks }: RightSidebarProps) => {
+const RightSidebar = ({ user, transactions, accounts }: RightSidebarProps) => {
+  const categories: CategoryCount[] = countTransactionCategories(transactions);
   return (
     <div className="no-scrollbar hidden h-screen max-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] xl:overflow-y-scroll ">
       <section className="flex flex-col pb-20 ">
@@ -33,20 +36,20 @@ const RightSidebar = ({ user, accounts, banks }: RightSidebarProps) => {
             </span>
           </Link>
         </div>
-        {banks?.length > 0 && (
+        {accounts?.length > 0 && (
           <div className="relative flex flex-1 flex-col items-center justify-center gap-5">
             <div className="relative z-20">
               <BankCard
-                key={banks[0]._id}
+                key={accounts[0].id}
                 account={accounts[0]}
                 userName={`${user?.firstName} ${user?.lastName}`}
                 showBalance={false}
               />
             </div>
-            {banks[1] && (
+            {accounts[1] && (
               <div className="absolute right-0 top-8 z-10">
                 <BankCard
-                  key={banks[0]._id}
+                  key={accounts[0].id}
                   account={accounts[0]}
                   userName={`${user?.firstName} ${user?.lastName}`}
                   showBalance={false}
@@ -55,6 +58,14 @@ const RightSidebar = ({ user, accounts, banks }: RightSidebarProps) => {
             )}
           </div>
         )}
+        <div className="mt-10 flex flex-1 flex-col gap-6">
+          <span className="">Top categories</span>
+          <div className="space-y-5">
+            {categories.map((category, index) => {
+              return <Category key={category.name} category={category} />;
+            })}
+          </div>
+        </div>
       </section>
     </div>
   );

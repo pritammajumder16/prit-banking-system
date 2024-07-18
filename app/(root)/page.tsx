@@ -62,7 +62,6 @@ const Home = () => {
         />
       </div>
       <RightSidebar
-        banks={[]}
         user={stableLoggedIn}
         transactions={currentAccount?.transactions}
         accounts={accountsData?.accounts?.slice(0, 1)}
