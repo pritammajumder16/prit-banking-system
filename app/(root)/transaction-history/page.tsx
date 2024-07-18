@@ -1,37 +1,53 @@
 "use client";
 import HeaderBox from "@/components/HeaderBox";
 import Loading from "@/components/Loader";
+import { Pagination } from "@/components/Pagination";
 import TransactionsTable from "@/components/TransactionsTable";
 import { getAccounts, getAccount } from "@/lib/actions/bank.actions";
 import { formatAmount } from "@/lib/utils";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-const TransactionHistory = () => {
+const TransactionHistory = ({
+  searchParams: { id, page },
+}: SearchParamProps) => {
+  const currentPage = Number(page) || 1;
   const loggedIn = useSelector((state: any) => {
     return state?.auth?.auth;
   });
-  const [page, setPage] = useState<number>(1);
   const [accountsData, setAccountsData] = useState<TotlaBalanceBoxProps>();
   const [currentAccount, setCurrentAccount] = useState<{
     account: Account;
     transactions: Transaction[];
   }>();
+
   useEffect(() => {
     (async () => {
       const accountsResponse = await getAccounts({ userId: loggedIn._id });
 
       setAccountsData(accountsResponse.data);
-      const currentBankId = accountsResponse?.data?.accounts?.[0]?.bank?._id;
-
+      console.log(accountsResponse);
+      const currentBankId =
+        id || accountsResponse.data?.accounts?.[0]?.bank?._id;
+      console.log("currentBankId", currentBankId);
       const currentAccountResponse = await getAccount({
-        bankId: currentBankId,
+        bankId: currentBankId as string,
       });
 
       setCurrentAccount(currentAccountResponse.data);
     })();
   }, []);
+  const pageSize = 10;
+  console.log("current", currentAccount);
   if (!currentAccount) return <Loading />;
+  const totalPages = Math.ceil(currentAccount?.transactions.length / pageSize);
+  const indexOfLastTransaction = currentPage * pageSize;
+  const indexOfFirstTransaction = indexOfLastTransaction - pageSize;
+  const currentTransactions = currentAccount?.transactions.slice(
+    indexOfFirstTransaction,
+    indexOfLastTransaction
+  );
+
   return (
     <section className="flex max-h-screen w-full flex-col gap-8 overflow-y-scroll bg-gray-25 p-8 xl:py-12">
       <div className="flex w-full flex-col items-start justify-between gap-8 md:flex-row">
@@ -62,9 +78,12 @@ const TransactionHistory = () => {
           </div>
         </div>
         <div className="flex w-full flex-col gap-6">
-          <TransactionsTable
-            transactions={currentAccount?.transactions || []}
-          />
+          <TransactionsTable transactions={currentTransactions} />
+          {totalPages > 1 && (
+            <div className="my-4 w-full">
+              <Pagination page={currentPage} totalPages={totalPages} />
+            </div>
+          )}
         </div>
       </div>
     </section>
