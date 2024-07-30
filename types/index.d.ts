@@ -40,6 +40,7 @@ declare type User = {
   postalCode: string;
   dateOfBirth: string;
   ssn: string;
+  stripeCustomerId: string;
 };
 
 declare type NewUserParams = {

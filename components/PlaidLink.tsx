@@ -12,7 +12,6 @@ import {
   exchangePublicToken,
 } from "@/lib/actions/plaid.actions";
 import Image from "next/image";
-import Loading from "./Loader";
 
 const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const [token, setToken] = useState<string | null>(null);

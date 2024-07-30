@@ -25,7 +25,26 @@ export const createLinkToken = async (user: User) => {
       client_name: user.lastName,
       products: ["auth"] as Products[],
       language: "en",
-      country_codes: ["US"] as CountryCode[],
+      country_codes: [
+        "US",
+        "GB",
+        "ES",
+        "NL",
+        "FR",
+        "IE",
+        "CA",
+        "DE",
+        "IT",
+        "PL",
+        "DK",
+        "NO",
+        "SE",
+        "EE",
+        "LT",
+        "LV",
+        "PT",
+        "BE",
+      ] as CountryCode[],
     };
     const response = await plaidClient.linkTokenCreate(tokenParams);
     return getSuccessResponseObject({
@@ -74,6 +93,9 @@ export const exchangePublicToken = async ({
       account_id: accountData.account_id,
       processor: "dwolla" as ProcessorTokenCreateRequestProcessorEnum,
     };
+    const stripeProcessor =
+      await plaidClient.processorStripeBankAccountTokenCreate(request);
+    console.log("stripeProcessor", stripeProcessor);
     const processorTokenResponse = await plaidClient.processorTokenCreate(
       request
     );

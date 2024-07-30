@@ -15,6 +15,7 @@ const User = new Schema<User>(
     ssn: { type: String, required: true },
     dwollaCustomerId: { type: String, required: true },
     dwollaCustomerUrl: { type: String, required: true },
+    stripeCustomerId: { type: String, required: true },
   },
   {
     timestamps: true,

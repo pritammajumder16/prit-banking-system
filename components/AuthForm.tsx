@@ -102,9 +102,15 @@ const AuthForm = ({ type }: { type: string }) => {
       <header className="flex flex-col gap-5 md:gap-8">
         <Link
           href="/"
-          className=" cursor-pointer flex items-center gap-1 px-4 "
+          className=" cursor-pointer flex items-center gap-2 px-4 "
         >
-          <Image src={"/icons/logo.svg"} width={34} height={34} alt="Logo" />
+          <Image
+            className="text-red-500"
+            src={"/icons/logo.svg"}
+            width={34}
+            height={34}
+            alt="Logo"
+          />
           <span className="font-ibm-plex-serif text-[26px] font-bold text-black-1 block">
             Prit
           </span>
