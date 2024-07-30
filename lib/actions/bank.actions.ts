@@ -42,7 +42,7 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
         const institution = await getInstitution({
           institutionId: accountsResponse.data.item.institution_id!,
         });
-
+        console.log("instituition", institution);
         const account = {
           id: accountData.account_id,
           availableBalance: accountData.balances.available!,
@@ -84,16 +84,13 @@ export const getAccounts = async ({ userId }: getAccountsProps) => {
 // Get one bank account
 export const getAccount = async ({ bankId }: getAccountProps) => {
   try {
-    // get bank from db
     const bank = await Bank.findOne({ _id: bankId });
 
-    // get account info from plaid
     const accountsResponse = await plaidClient.accountsGet({
       access_token: bank.accessToken,
     });
     const accountData = accountsResponse.data.accounts[0];
 
-    // get transfer transactions from appwrite
     const transferTransactionsData = await getTransactionsByBankId({
       bankId: bank._id,
     });
@@ -161,7 +158,26 @@ export const getInstitution = async ({
   try {
     const institutionResponse = await plaidClient.institutionsGetById({
       institution_id: institutionId,
-      country_codes: ["US"] as CountryCode[],
+      country_codes: [
+        "US",
+        "GB",
+        "ES",
+        "NL",
+        "FR",
+        "IE",
+        "CA",
+        "DE",
+        "IT",
+        "PL",
+        "DK",
+        "NO",
+        "SE",
+        "EE",
+        "LT",
+        "LV",
+        "PT",
+        "BE",
+      ] as CountryCode[],
     });
 
     const intitution = institutionResponse.data.institution;

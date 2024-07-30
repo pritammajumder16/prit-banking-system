@@ -84,3 +84,26 @@ export const createStripeSource = async ({
     return getErrorResponseObject({ message: String(error) });
   }
 };
+export const createStripeTransaction = async ({
+  customerId,
+  currency,
+  amount,
+}: {
+  amount: number;
+  customerId: string;
+  currency: string;
+}) => {
+  try {
+    const res = await stripeClient.charges.create({
+      amount,
+      currency,
+      customer: customerId,
+    });
+    return getSuccessResponseObject({
+      data: parseStringify(res),
+      message: "Created stripe transaction successfully",
+    });
+  } catch (error) {
+    return getErrorResponseObject({ message: String(error) });
+  }
+};

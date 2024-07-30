@@ -340,3 +340,4 @@ declare interface User {
   email: string;
   password: string;
 }
+declare type PaymentTypes = "dwolla" | "stripe";
