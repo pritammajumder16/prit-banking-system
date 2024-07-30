@@ -15,6 +15,8 @@ import {
 import { revalidatePath } from "next/cache";
 import { addFundingSource } from "./dwolla.actions";
 import Bank from "@/Model/Bank";
+import { createStripeSource, verifyStripeCustomer } from "./stripe.actions";
+import { HttpException } from "@/classes/http-exception";
 
 export const createLinkToken = async (user: User) => {
   try {
@@ -95,14 +97,29 @@ export const exchangePublicToken = async ({
     };
     const stripeProcessor =
       await plaidClient.processorStripeBankAccountTokenCreate(request);
-    console.log("stripeProcessor", stripeProcessor);
+    console.log(
+      "stripe_bank_account_token",
+      stripeProcessor.data.stripe_bank_account_token
+    );
+    const stripeSource = await createStripeSource({
+      stripeCustomerId: user.stripeCustomerId,
+      stripe_bank_account_token: stripeProcessor.data.stripe_bank_account_token,
+    });
+    if (!stripeSource) {
+      throw new HttpException("Stripe source creation failed", 400);
+    }
+    const verifyStripe = await verifyStripeCustomer({
+      stripeCustomerId: user.stripeCustomerId,
+      stripe_bank_account_token: stripeProcessor.data.stripe_bank_account_token,
+    });
+
     const processorTokenResponse = await plaidClient.processorTokenCreate({
       ...request,
       processor: "dwolla" as ProcessorTokenCreateRequestProcessorEnum,
     });
-    console.log("dwollaProcessor", processorTokenResponse);
     const processorToken = processorTokenResponse.data.processor_token;
 
+    console.log(verifyStripe.data);
     const fundingSourceUrl = await addFundingSource({
       dwollaCustomerId: user.dwollaCustomerId,
       processorToken,
