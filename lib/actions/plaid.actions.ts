@@ -79,6 +79,7 @@ export const exchangePublicToken = async ({
   user,
 }: exchangePublicTokenProps) => {
   try {
+    console.log("Called");
     const response = await plaidClient.itemPublicTokenExchange({
       public_token: publicToken,
     });
@@ -88,17 +89,18 @@ export const exchangePublicToken = async ({
       access_token: accessToken,
     });
     const accountData = accountsResponse.data.accounts[0];
-    const request: ProcessorTokenCreateRequest = {
+    const request = {
       access_token: accessToken,
       account_id: accountData.account_id,
-      processor: "dwolla" as ProcessorTokenCreateRequestProcessorEnum,
     };
     const stripeProcessor =
       await plaidClient.processorStripeBankAccountTokenCreate(request);
     console.log("stripeProcessor", stripeProcessor);
-    const processorTokenResponse = await plaidClient.processorTokenCreate(
-      request
-    );
+    const processorTokenResponse = await plaidClient.processorTokenCreate({
+      ...request,
+      processor: "dwolla" as ProcessorTokenCreateRequestProcessorEnum,
+    });
+    console.log("dwollaProcessor", processorTokenResponse);
     const processorToken = processorTokenResponse.data.processor_token;
 
     const fundingSourceUrl = await addFundingSource({

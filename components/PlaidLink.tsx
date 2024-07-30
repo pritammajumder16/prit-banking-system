@@ -30,7 +30,8 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
 
   const onSuccess = useCallback<PlaidLinkOnSuccess>(
     async (public_token: string) => {
-      console.log(public_token);
+      console.log(user);
+      console.log(public_token, user);
       if (user) {
         await exchangePublicToken({ publicToken: public_token, user });
         router.push("/");
