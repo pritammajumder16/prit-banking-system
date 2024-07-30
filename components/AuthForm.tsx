@@ -105,8 +105,8 @@ const AuthForm = ({ type }: { type: string }) => {
           className=" cursor-pointer flex items-center gap-1 px-4 "
         >
           <Image src={"/icons/logo.svg"} width={34} height={34} alt="Logo" />
-          <span className="2xl:text-[26px] font-ibm-plex-serif text-[26px] font-bold text-black-1 block">
-            Horizon
+          <span className="font-ibm-plex-serif text-[26px] font-bold text-black-1 block">
+            Prit
           </span>
         </Link>
         <div className="flex flex-col gap-1 md:gap-3">

@@ -21,7 +21,7 @@ const Sidebar = ({ user }: SiderbarProps) => {
             className="md:size-[24px] max-xl:size-14"
           />
           <span className="2xl:text-26 font-ibm-plex-serif text-[26px] font-bold text-black-1 block max-xl:hidden">
-            Horizon
+            Prit
           </span>
         </Link>
         <MainNavContent />

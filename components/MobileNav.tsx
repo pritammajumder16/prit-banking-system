@@ -40,7 +40,7 @@ const MobileNav = ({ user }: MobileNavProps) => {
                 className="md:size-[24px] max-xl:size-14"
               />
               <span className="2xl:text-26 font-ibm-plex-serif text-[26px] font-bold text-black-1 block">
-                Horizon
+                Prit
               </span>
             </Link>
             <div className="flex h-[calc(100vh-100px)] flex-col justify-between overflow-y-auto;">
