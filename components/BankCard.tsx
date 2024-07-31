@@ -1,4 +1,4 @@
-import { formatAmount } from "@/lib/utils";
+import { formatAmount } from "@/utils/functions";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";

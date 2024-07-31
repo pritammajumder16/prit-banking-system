@@ -13,7 +13,7 @@ import {
   formatDateTime,
   getTransactionStatus,
   removeSpecialCharacters,
-} from "@/lib/utils";
+} from "@/utils/functions";
 import CategoryBadge from "./CategoryBadge";
 
 const TransactionsTable = ({ transactions }: TransactionTableProps) => {

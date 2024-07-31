@@ -13,7 +13,7 @@ import {
   getErrorResponseObject,
   getSuccessResponseObject,
   parseStringify,
-} from "../utils";
+} from "../../utils/functions";
 
 import Bank from "@/Model/Bank";
 import { plaidClient } from "../plaid";

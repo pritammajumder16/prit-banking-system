@@ -8,7 +8,6 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { createTransfer } from "@/lib/actions/dwolla.actions";
-import { decryptId } from "@/lib/utils";
 
 import { BankDropdown } from "./BankDropdown";
 import { Button } from "./ui/button";
@@ -30,6 +29,7 @@ import {
 } from "@/lib/actions/bank.actions";
 import { useSelector } from "react-redux";
 import { createTransaction } from "@/lib/actions/transaction.actions";
+import { decryptId } from "@/utils/functions";
 
 const formSchema = z.object({
   email: z.string().email("Invalid email address"),

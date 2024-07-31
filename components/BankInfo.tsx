@@ -8,7 +8,7 @@ import {
   formUrlQuery,
   formatAmount,
   getAccountTypeColors,
-} from "@/lib/utils";
+} from "@/utils/functions";
 
 const BankInfo = ({ account, bankId, type }: BankInfoProps) => {
   const router = useRouter();

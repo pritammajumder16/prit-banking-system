@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { ComponentProps, Dispatch, useState } from "react";
 
 import {
   Select,
@@ -12,23 +12,26 @@ import {
   SelectLabel,
   SelectTrigger,
 } from "@/components/ui/select";
-import { formUrlQuery, formatAmount } from "@/utils/functions";
+import { formUrlQuery } from "@/utils/functions";
+import { UseFormSetValue } from "react-hook-form";
 
-export const BankDropdown = ({
-  accounts = [],
+export const UsersDropdown = ({
+  users = [],
   setValue,
   otherStyles,
-}: BankDropdownProps) => {
+}: {
+  users: User[];
+  otherStyles: string;
+  setValue: UseFormSetValue<any>;
+}) => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [selected, setSeclected] = useState(accounts[0]);
+  const [selected, setSeclected] = useState(users[0]);
 
-  const handleBankChange = (id: string) => {
-    const account = accounts.find(
-      (account) => String(account.bank._id) === String(id)
-    )!;
+  const handleUserChange = (id: string) => {
+    const user = users.find((user) => String(user._id) === String(id))!;
 
-    setSeclected(account);
+    setSeclected(user);
     const newUrl = formUrlQuery({
       params: searchParams.toString(),
       key: "id",
@@ -37,14 +40,14 @@ export const BankDropdown = ({
     router.push(newUrl, { scroll: false });
 
     if (setValue) {
-      setValue("senderBank", id);
+      setValue("userId", id);
     }
   };
 
   return (
     <Select
-      defaultValue={selected?.id}
-      onValueChange={(value) => handleBankChange(value)}
+      defaultValue={selected?._id}
+      onValueChange={(value) => handleUserChange(value)}
     >
       <SelectTrigger
         className={`flex w-full gap-3 md:w-[300px] bg-white ${otherStyles}`}
@@ -55,7 +58,12 @@ export const BankDropdown = ({
           height={20}
           alt="account"
         />
-        <p className="line-clamp-1 w-full text-left">{selected?.name}</p>
+        {selected && (
+          <p className="line-clamp-1 w-full text-left">
+            {selected?.firstName + " " + selected?.lastName}&nbsp;(
+            {selected.email})
+          </p>
+        )}
       </SelectTrigger>
       <SelectContent
         className={`w-full md:w-[300px] bg-white ${otherStyles}`}
@@ -63,18 +71,17 @@ export const BankDropdown = ({
       >
         <SelectGroup>
           <SelectLabel className="py-2 font-normal text-gray-500">
-            Select a bank to display
+            Select a user to display
           </SelectLabel>
-          {accounts?.map((account: Account) => (
+          {users?.map((user: User) => (
             <SelectItem
-              key={account.id}
-              value={account.bank._id}
+              key={user._id}
+              value={user._id}
               className="cursor-pointer border-t"
             >
               <div className="flex flex-col ">
-                <p className="text-16 font-medium">{account.name}</p>
-                <p className="text-14 font-medium text-blue-600">
-                  {formatAmount(account.currentBalance)}
+                <p className="text-16 font-medium">
+                  {user.firstName + " " + user.lastName}&nbsp; ({user.email})
                 </p>
               </div>
             </SelectItem>

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import BankCard from "./BankCard";
-import { countTransactionCategories } from "@/lib/utils";
+import { countTransactionCategories } from "@/utils/functions";
 import Category from "./Category";
 
 const RightSidebar = ({ user, transactions, accounts }: RightSidebarProps) => {

@@ -4,7 +4,7 @@ import Loading from "@/components/Loader";
 import { Pagination } from "@/components/Pagination";
 import TransactionsTable from "@/components/TransactionsTable";
 import { getAccounts, getAccount } from "@/lib/actions/bank.actions";
-import { formatAmount } from "@/lib/utils";
+import { formatAmount } from "@/utils/functions";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 

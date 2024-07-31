@@ -11,7 +11,7 @@ import {
   getErrorResponseObject,
   getSuccessResponseObject,
   parseStringify,
-} from "../utils";
+} from "../../utils/functions";
 import { revalidatePath } from "next/cache";
 import { addFundingSource } from "./dwolla.actions";
 import Bank from "@/Model/Bank";

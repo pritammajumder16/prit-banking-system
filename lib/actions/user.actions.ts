@@ -8,7 +8,7 @@ import {
   hash,
   parseStringify,
   verifyHash,
-} from "../utils";
+} from "../../utils/functions";
 import { cookies } from "next/headers";
 import { credentials } from "@/constants/credentials";
 import { createDwollaCustomer } from "./dwolla.actions";

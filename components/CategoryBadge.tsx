@@ -1,5 +1,5 @@
 import { transactionCategoryStyles } from "@/constants";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/functions";
 import React from "react";
 
 const CategoryBadge = ({ category }: { category: string }) => {

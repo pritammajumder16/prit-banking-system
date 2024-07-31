@@ -5,7 +5,7 @@ import {
   getErrorResponseObject,
   getSuccessResponseObject,
   parseStringify,
-} from "../utils";
+} from "../../utils/functions";
 const getEnvironment = (): "production" | "sandbox" => {
   const environment = credentials.STRIPE_ENVIRONMENT as string;
 
@@ -88,16 +88,25 @@ export const createStripeTransaction = async ({
   customerId,
   currency,
   amount,
+  note,
+  receiptEmail,
 }: {
-  amount: number;
+  amount: string;
   customerId: string;
   currency: string;
+  note?: string;
+  receiptEmail: string;
 }) => {
   try {
+    const amountInCents = Math.round(parseFloat(amount) * 100);
+
+    // Create a charge
     const res = await stripeClient.charges.create({
-      amount,
-      currency,
-      customer: customerId,
+      amount: amountInCents,
+      currency: currency,
+      customer: customerId, // Stripe Customer ID
+      description: note || "Payment transfer",
+      receipt_email: receiptEmail, // Send receipt to this email
     });
     return getSuccessResponseObject({
       data: parseStringify(res),
