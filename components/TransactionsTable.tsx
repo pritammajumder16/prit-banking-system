@@ -18,7 +18,7 @@ import CategoryBadge from "./CategoryBadge";
 
 const TransactionsTable = ({ transactions }: TransactionTableProps) => {
   return (
-    <Table>
+    <Table className="overflow-y-scroll">
       <TableCaption className="bg-[#f9fafb]">
         A list of your recent invoices.
       </TableCaption>

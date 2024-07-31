@@ -11,8 +11,8 @@ const ibmPlexSerif = IBM_Plex_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "Prit",
-  description: "It is a financial system and banking platform app",
+  title: "Pritam Banking System",
+  description: "Financial banking system by pritam",
   icons: {
     icon: "/icons/logo.svg",
   },

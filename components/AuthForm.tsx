@@ -112,7 +112,7 @@ const AuthForm = ({ type }: { type: string }) => {
             alt="Logo"
           />
           <span className="font-ibm-plex-serif text-[26px] font-bold text-black-1 block">
-            Prit
+            Prit Banking System
           </span>
         </Link>
         <div className="flex flex-col gap-1 md:gap-3">

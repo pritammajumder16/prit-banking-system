@@ -26,11 +26,11 @@ const MobileNav = ({ user }: MobileNavProps) => {
             height={30}
           />
         </SheetTrigger>
-        <SheetContent side={"left"} className="border-none bg-white ">
+        <SheetContent side={"left"} className="border-none bg-white w-fit ">
           <nav className="flex flex-col ">
             <Link
               href="/"
-              className="md:mb-12 cursor-pointer items-center gap-1 px-4 md:px-0 md:gap-2 flex"
+              className="cursor-pointer items-center gap-1 px-4  flex"
             >
               <Image
                 src={"/icons/logo.svg"}
@@ -39,13 +39,13 @@ const MobileNav = ({ user }: MobileNavProps) => {
                 alt="Logo"
                 className="md:size-[24px] max-xl:size-14"
               />
-              <span className="2xl:text-26 font-ibm-plex-serif text-[26px] font-bold text-black-1 block">
+              <span className=" font-ibm-plex-serif text-[26px] font-bold text-black-1 block">
                 Prit
               </span>
             </Link>
-            <div className="flex h-[calc(100vh-100px)] flex-col justify-between overflow-y-auto;">
+            <div className="flex h-[calc(100vh-100px)] flex-col justify-between ">
               <SheetClose asChild>
-                <nav className="flex flex-1 flex-col gap-6 pt-16 text-white">
+                <nav className="flex flex-1 flex-col gap-6 pt-10 text-white">
                   {sidebarLinks?.map((item) => {
                     const isActive = pathName === item.route;
                     return (
@@ -78,7 +78,6 @@ const MobileNav = ({ user }: MobileNavProps) => {
                       </SheetClose>
                     );
                   })}
-                  USER
                 </nav>
               </SheetClose>
               <Footer user={user} />

@@ -15,7 +15,7 @@ const MainNavContent = () => {
         return (
           <Link
             className={cn(
-              "flex gap-3 items-center py-1 md:p-3 2xl:p-4 rounded-lg justify-center xl:justify-start",
+              "flex gap-3 items-center py-1 lg:p-3  p-4 rounded-lg justify-center lg:justify-start",
               { " bg-bankGradient": isActive }
             )}
             href={item.route}
@@ -31,8 +31,10 @@ const MainNavContent = () => {
             </div>
             <p
               className={cn(
-                "text-16 font-semibold text-black-2 max-xl:hidden",
-                { " !text-white": isActive }
+                "text-16 font-semibold text-black-2 hidden lg:block",
+                {
+                  " !text-white": isActive,
+                }
               )}
             >
               {item.label}

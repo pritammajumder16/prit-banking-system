@@ -21,7 +21,7 @@ const RecentTransactions = ({
     indexOfLastTransaction
   );
   return (
-    <section className="flex w-full flex-col gap-6">
+    <section className="flex flex-col gap-6">
       <header className="flex items-center justify-between">
         <span className=" text-xl md:text-2xl font-semibold text-gray-900">
           Recent transactions
@@ -33,7 +33,7 @@ const RecentTransactions = ({
           View all
         </Link>
       </header>
-      <Tabs defaultValue={bankId} className="w-full">
+      <Tabs defaultValue={bankId}>
         <TabsList className="custom-scrollbar mb-8 flex w-full flex-nowrap">
           {accounts.map((account: Account) => (
             <TabsTrigger value={account.bank._id} key={account.id}>

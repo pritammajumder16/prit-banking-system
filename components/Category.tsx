@@ -17,7 +17,12 @@ const Category = ({ category }: CategoryProps) => {
 
   return (
     <div className={cn("gap-[18px] flex p-4 rounded-xl", bg)}>
-      <figure className={cn("flex-center size-10 rounded-full", circleBg)}>
+      <figure
+        className={cn(
+          "flex items-center justify-center size-10 rounded-full",
+          circleBg
+        )}
+      >
         <Image src={icon} width={20} height={20} alt={category.name} />
       </figure>
       <div className="flex w-full flex-1 flex-col gap-2">

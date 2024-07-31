@@ -58,10 +58,10 @@ export default function RootLayout({
   if (!memoizedLoggedIn) return <Loading />;
 
   return (
-    <section className="flex md:flex-row flex-col h-screen w-full font-inter">
+    <section className="flex sm:flex-row flex-col h-screen w-full max-w-screen overflow-hidden font-inter">
       <Sidebar user={memoizedLoggedIn} />
-      <div className="flex flex-col">
-        <div className="flex h-16 items-center justify-between p-5 shadow-creditCard sm:p-8 md:hidden">
+      <div className=" flex-col flex sm:hidden">
+        <div className="flex h-16 items-center justify-between  shadow-creditCard p-8 sm:hidden">
           <Image alt="menu item" width={30} height={30} src="/icons/logo.svg" />
           <div>
             <MobileNav user={memoizedLoggedIn} />

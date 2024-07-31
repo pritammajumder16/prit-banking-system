@@ -256,8 +256,8 @@ const PaymentTransferForm = () => {
           )}
         />
 
-        <div className="payment-transfer_btn-box">
-          <Button type="submit" className="payment-transfer_btn">
+        <div className="">
+          <Button type="submit" className="form-btn">
             {isLoading ? (
               <>
                 <Loader2 size={20} className="animate-spin" /> &nbsp; Sending...

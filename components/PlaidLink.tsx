@@ -83,7 +83,7 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
       ) : (
         <Button
           onClick={() => open()}
-          className="flex justify-start cursor-pointer gap-3 rounded-lg bg-transparent flex-row"
+          className="flex justify-center lg:justify-start cursor-pointer gap-3 rounded-lg  bg-transparent flex-row"
         >
           <Image
             src={"/icons/connect-bank.svg"}
@@ -91,7 +91,9 @@ const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
             width={24}
             height={24}
           />
-          <p className="text-base font-semibold text-black-2">Connect bank</p>
+          <p className="hidden lg:block text-base font-semibold text-black-2">
+            Connect bank
+          </p>
         </Button>
       )}
     </>
