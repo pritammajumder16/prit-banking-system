@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Prit Banking System
+
+Prit Banking System is a web application developed using Next.js that allows users to manage their bank accounts. Users can connect their accounts using Plaid, view transactions, make ACH transactions via Stripe and Dwolla, and view balance and account details.
+
+## Features
+
+- **Plaid Integration**: Connect your bank accounts securely using Plaid to view your transactions, balance, and account details.
+- **Stripe Transactions**: Make ACH transactions using Stripe.
+- **Dwolla Transactions**: Make ACH transactions using Dwolla.
+- **User Authentication**: Sign up and sign in functionality to secure user data.
+- **Responsive Design**: Mobile-friendly user interface.
+
+## 🛠️ Technologies Used
+
+- **Frontend**: Next.js, React, Tailwind CSS
+- **State Management**: Redux Toolkit
+- **Form Handling**: React Hook Form with Zod for validation
+- **Charts**: Chart.js with React integration
+- **Notifications**: React Toastify
+- **Authentication**: JSON Web Tokens (JWT)
+- **Database**: MongoDB with Mongoose
+- **API Clients**: Plaid, Stripe, Dwolla
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js and npm installed
+- MongoDB instance running
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To get started with this project locally, follow these steps:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. **Clone the Repository**
 
-## Learn More
+   ```bash
+   git clone https://github.com/pritammajumder16/prit-banking-system.git
+   cd prit-banking-systems
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+   or
+   ```bash
+   yarn install
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Setup Environments
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Check the .env.example file
 
-## Deploy on Vercel
+### Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Start the development server:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```bash
+   npm run dev
+   ```
+
+2. Open your browser and navigate to `http://localhost:3000` to see the application in action.
+
+## 📜 Scripts
+
+- `npm run dev`: Starts the development server on port 3000.
+- `npm run build`: Builds the project for production.
+- `npm run preview`: Previews the production build.
+- `npm run lint`: Lints the codebase with ESLint.
+
+## 🌐 Deployment
+
+The project is deployed and can be accessed at:
+
+[https://prit-banking-system.vercel.app/](https://prit-banking-system.vercel.app/)
+
+## 📧 Contact
+
+For any questions or feedback, please reach out to:
+
+- **Email**: [pritammajumder416@gmail.com](mailto:pritammajumder416@gmail.com)
+- **GitHub**: [github.com/pritammajumder16](https://github.com/pritammajumder16)
+
+## 📜 License
+
+This project is licensed under the MIT License.
