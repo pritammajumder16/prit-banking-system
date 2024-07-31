@@ -229,6 +229,7 @@ declare interface RecentTransactionsProps {
   transactions: Transaction[];
   bankId: string;
   page: number;
+  loading: boolean;
 }
 
 declare interface TransactionHistoryTableProps {

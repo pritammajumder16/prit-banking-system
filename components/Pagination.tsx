@@ -11,7 +11,7 @@ export const Pagination = ({ page, totalPages }: PaginationProps) => {
   const searchParams = useSearchParams()!;
 
   const handleNavigation = (type: "prev" | "next") => {
-    const pageNumber = type === "prev" ? page - 1 : page + 1;
+    const pageNumber = type === "prev" ? Number(page) - 1 : Number(page) + 1;
 
     const newUrl = formUrlQuery({
       params: searchParams.toString(),

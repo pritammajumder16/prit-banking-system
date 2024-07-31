@@ -8,7 +8,7 @@ import Category from "./Category";
 const RightSidebar = ({ user, transactions, accounts }: RightSidebarProps) => {
   const categories: CategoryCount[] = countTransactionCategories(transactions);
   return (
-    <div className="no-scrollbar min-w-fit h-fit hidden min-h-screen flex-col border-l border-gray-200 xl:flex w-[355px] overflow-y-scroll  ">
+    <div className="no-scrollbar min-w-fit hidden h-screen flex-col border-l border-gray-200 xl:flex w-[355px] overflow-y-scroll  ">
       <section className="flex flex-col pb-4 ">
         <div className="h-[120px] w-full bg-gradient-mesh bg-cover bg-no-repeat">
           <div className=" flex px-6 max-xl:justify-center">
@@ -36,6 +36,7 @@ const RightSidebar = ({ user, transactions, accounts }: RightSidebarProps) => {
             </span>
           </Link>
         </div>
+
         {accounts?.length > 0 && (
           <div className="relative flex flex-1 flex-col items-center justify-center gap-5">
             <div className="relative z-20">
@@ -58,9 +59,9 @@ const RightSidebar = ({ user, transactions, accounts }: RightSidebarProps) => {
             )}
           </div>
         )}
-        <div className="mt-10 flex flex-1 flex-col gap-6">
-          <span className="">Top categories</span>
-          <div className="space-y-5">
+        <div className="mt-10 flex flex-1 flex-col gap-6 ">
+          <span className="">Top categories ({categories.length})</span>
+          <div className="">
             {categories.map((category, index) => {
               return <Category key={category.name} category={category} />;
             })}

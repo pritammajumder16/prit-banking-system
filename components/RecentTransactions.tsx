@@ -10,6 +10,7 @@ const RecentTransactions = ({
   accounts,
   transactions = [],
   page = 1,
+  loading,
   bankId,
 }: RecentTransactionsProps) => {
   const pageSize = 10;
@@ -37,29 +38,35 @@ const RecentTransactions = ({
         <TabsList className="custom-scrollbar mb-8 flex w-full flex-nowrap">
           {accounts.map((account: Account) => (
             <TabsTrigger value={account.bank._id} key={account.id}>
-              <BankTabItem account={account} bankId={account.bank._id} />
+              <BankTabItem account={account} bankId={bankId} />
             </TabsTrigger>
           ))}
         </TabsList>
-        {accounts.map((account: Account) => (
-          <TabsContent
-            key={account.id}
-            value={account.bank._id}
-            className="space-y-4"
-          >
-            <BankInfo
-              account={account}
-              bankId={account?.bank._id}
-              type={"full"}
-            />
-            <TransactionsTable transactions={currentTransactions} />
-            {totalPages > 1 && (
-              <div className="my-4 w-full">
-                <Pagination page={page} totalPages={totalPages} />
-              </div>
-            )}
-          </TabsContent>
-        ))}
+        {loading ? (
+          <div className="w-full flex items-center justify-center">
+            <div className="border-t-2 border-blue-600 rounded-full animate-spin size-8"></div>
+          </div>
+        ) : (
+          accounts.map((account: Account) => (
+            <TabsContent
+              key={account.id}
+              value={account.bank._id}
+              className="space-y-4"
+            >
+              <BankInfo
+                account={account}
+                bankId={account?.bank._id}
+                type={"full"}
+              />
+              <TransactionsTable transactions={currentTransactions} />
+              {totalPages > 1 && (
+                <div className="my-4 w-full">
+                  <Pagination page={page} totalPages={totalPages} />
+                </div>
+              )}
+            </TabsContent>
+          ))
+        )}
       </Tabs>
     </section>
   );
