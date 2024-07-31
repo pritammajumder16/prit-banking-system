@@ -13,21 +13,25 @@ import { useRouter } from "next/navigation";
 import { signIn, signUp } from "@/lib/actions/user.actions";
 import { toast } from "react-toastify";
 import PlaidLink from "./PlaidLink";
-
+const dateOfBirthSchema = z
+  .string()
+  .regex(
+    /^(19|20)\d\d-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/,
+    "Invalid date format (YYYY-MM-DD)"
+  );
 const authFormSchemaMaker = (type: string) =>
   z.object({
     email: z.string().email(),
     password: z.string().min(4).max(10),
-    dateOfBirth: type == "sign-in" ? z.string().optional() : z.string().min(3),
+    dateOfBirth: type === "sign-in" ? z.string().optional() : dateOfBirthSchema,
     firstName: type == "sign-in" ? z.string().optional() : z.string().min(3),
     lastName: type == "sign-in" ? z.string().optional() : z.string().min(3),
     address: type == "sign-in" ? z.string().optional() : z.string().max(50),
     city: type == "sign-in" ? z.string().optional() : z.string().max(50),
-    state:
-      type == "sign-in" ? z.string().optional() : z.string().min(2).max(20),
+    state: type == "sign-in" ? z.string().optional() : z.string().min(2).max(2),
     postalCode:
       type == "sign-in" ? z.string().optional() : z.string().min(5).max(5),
-    ssn: type == "sign-in" ? z.string().optional() : z.string().min(3),
+    ssn: type == "sign-in" ? z.string().optional() : z.string().min(4).max(4),
   });
 
 const AuthForm = ({ type }: { type: string }) => {
@@ -40,6 +44,14 @@ const AuthForm = ({ type }: { type: string }) => {
     defaultValues: {
       email: "",
       password: "",
+      dateOfBirth: "",
+      firstName: "",
+      lastName: "",
+      address: "",
+      city: "",
+      state: "",
+      postalCode: "",
+      ssn: "",
     },
   });
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -112,7 +124,7 @@ const AuthForm = ({ type }: { type: string }) => {
             alt="Logo"
           />
           <span className="font-ibm-plex-serif text-[26px] font-bold text-black-1 block">
-            Prit Banking System
+            Prit
           </span>
         </Link>
         <div className="flex flex-col gap-1 md:gap-3">
@@ -171,14 +183,14 @@ const AuthForm = ({ type }: { type: string }) => {
                       formControl={form.control}
                       name={"state"}
                       label={"State"}
-                      placeholder={"Ex. West Bengal"}
+                      placeholder={"Ex. NY"}
                       type={"text"}
                     />
                     <CustomInput
                       formControl={form.control}
                       name={"postalCode"}
                       label={"Postal Code"}
-                      placeholder={"Ex. 700141"}
+                      placeholder={"Ex. 12345"}
                       type={"text"}
                     />
                   </div>
